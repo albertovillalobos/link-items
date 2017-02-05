@@ -82,13 +82,13 @@ class Navi extends React.Component {
 class Inventory extends React.Component {
   render() {
     return (
-        <div className='inventory'>
-          {
-            this.props.items.map(function(item) {
-              return <img src={item} className='inventory-item'/>
-            })
-          }
-        </div>
+      <div className='inventory'>
+        {
+          this.props.items.map(function(item) {
+            return (<img src={item} className='inventory-item'/>)
+          })
+        }
+      </div>
     )
   }
 }
