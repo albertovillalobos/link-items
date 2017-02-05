@@ -1,0 +1,40 @@
+/* Base Application Styles */
+body {
+  color: #fff;
+  background: #222;
+}
+
+.index {
+  text-align: center;
+  margin: 20px;
+}
+.index > img {
+  margin: 0 auto;
+  text-align: center;
+  max-width: 100px;
+  display: block;
+}
+
+.index .notice {
+  margin: 20px auto;
+  padding: 15px 0;
+  text-align: center;
+  border: 1px solid #000;
+  border-width: 1px 0;
+  background: #666;
+}
+
+.navi {
+  margin: 20px auto;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.navi img {
+  max-width: 50px;
+  display: inline-block;;
+}
+
+.inventory-item {
+  display: inline-block;
+}
