@@ -83,14 +83,25 @@ class Inventory extends React.Component {
   render() {
     return (
       <div className='inventory'>
-        {
-          this.props.items.map(function(item) {
-            return (<img src={item} className='inventory-item'/>)
-          })
-        }
+        {this.renderIventoryItems()}
       </div>
     )
   }
+
+  renderIventoryItems() {
+    return this.props.items.map(function(item) {
+      return <InventoryItem image={item}/>
+    })
+  }
+}
+
+class InventoryItem extends React.Component {
+  render() {
+    return (
+      <img src={this.props.image} className='inventory-item'/>
+    )
+  }
+
 }
 
 
