@@ -37,4 +37,5 @@ body {
 
 .inventory-item {
   display: inline-block;
+  cursor: pointer;
 }
