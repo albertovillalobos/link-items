@@ -4,8 +4,6 @@ var _ = require('underscore');
 
 import React from 'react';
 
-let yeomanImage = require('../images/yeoman.png');
-
 let cItems = [
   'http://www.zeldadungeon.net/Zelda05/Items/DekuStickG.png',
   'http://www.zeldadungeon.net/Zelda05/Items/DekuNutG.png',
@@ -38,7 +36,7 @@ class AppComponent extends React.Component {
     super(props);
     this.state = {
       hiddenItems: cItems,
-      shownItems: [],
+      shownItems: []
     }
   }
 
@@ -46,8 +44,8 @@ class AppComponent extends React.Component {
     return (
       <div className="index">
         <img src={linkImage} alt="Link" />
-        <Navi addItem={this.addItem.bind(this)}/>
-        <Inventory items={this.state.shownItems}/>
+        <Navi addItem={this.addItem.bind(this)} itemCount={this.state.shownItems.length}/>
+        <Inventory items={this.state.shownItems} removeItem={this.removeItem.bind(this)}/>
       </div>
     );
   }
@@ -66,14 +64,25 @@ class AppComponent extends React.Component {
       });
     }
   }
+
+  removeItem(item) {
+    console.log(`Removing item: ${item}`);
+    var shownItems = _.without(this.state.shownItems, item);
+    var hiddenItems = this.state.hiddenItems;
+    hiddenItems.push(item);
+    this.setState({
+      hiddenItems: hiddenItems,
+      shownItems: shownItems
+    });
+  }
 }
 
 class Navi extends React.Component {
   render() {
     return (
-      <div className='navi' onClick={this.props.addItem}>
-        <img className='navi' src={naviImage} alt="Navi" />
-        Click me to get an item!
+      <div className='navi'>
+        <img className='navi' src={naviImage} alt="Navi" onClick={this.props.addItem}/>
+        {this.props.itemCount > 0 ? 'Click Navi to get an item, or click an item to delete it' : 'Click Navi to get an item!' }
       </div>
     );
   }
@@ -89,19 +98,22 @@ class Inventory extends React.Component {
   }
 
   renderIventoryItems() {
-    return this.props.items.map(function(item) {
-      return <InventoryItem image={item}/>
-    })
+    return this.props.items.map(function(item, index) {
+      return <InventoryItem image={item} key={index} removeItem={this.props.removeItem}/>
+    }.bind(this))
   }
 }
 
 class InventoryItem extends React.Component {
   render() {
     return (
-      <img src={this.props.image} className='inventory-item'/>
+      <img src={this.props.image} className='inventory-item' onClick={this.removeItem.bind(this)}/>
     )
   }
 
+  removeItem() {
+    this.props.removeItem(this.props.image)
+  }
 }
 
 

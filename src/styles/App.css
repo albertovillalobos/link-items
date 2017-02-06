@@ -26,13 +26,13 @@ body {
 
 .navi {
   margin: 20px auto;
-  display: inline-block;
-  cursor: pointer;
+  display: block;
 }
 
 .navi img {
+  cursor: pointer;
   max-width: 50px;
-  display: inline-block;;
+  display: block;
 }
 
 .inventory-item {
